@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block page_title %}
+{{post.title}}
+{% endblock page_title %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blog/post-detail.css' %}" />
+{% endblock css_files %}
+
+
+
+{% block content %}
+
+{% if comment_form.errors %}
+
+<h1>ERROR IN YOUR COMMENT</h1>
+
+{% endif %}
+
+<section id="summary">
+<h2>{{post.Title}}</h2>
+<div>
+{% for tag in post_tags %}
+<span class="tag">{{tag}}</span>
+{% endfor %}
+</div>
+
+<div id = "read-later">
+<form action="{% url 'read-later' %}" method="POST">
+  {% csrf_token %}
+  <input type="hidden" value="{{post.id}}" name="post_id">
+  <button>
+    {% if saved %}
+    Remove from read later
+    {% else %}
+    READ LATER
+    {% endif %}
+  </button>
+</form>
+
+</div>
+
+<article>
+    <img src="{{ post.image.url }}" alt="Post TITLE">
+    <address>By <a href="mailto:{{post.author.Email}}">{{post.author}}</a></address>
+    <div>
+       Last updated on <time>{{post.Date|date:"d M Y"}}</time>    
+    </div>
+</article>
+</section>
+
+
+
+<main>
+    {{post.Content|linebreaks}}
+
+    
+  </main>
+
+  <section id = "comments">
+
+<ul>
+  {% for comment in comments %}
+  <li>
+    <h2>{{comment.user_name}}</h2>
+    <p>{{comment.text}}</p>
+  </li>
+  {% endfor %}
+</ul>
+  </section>
+
+  <section  id="comment-form">
+    <h1>Drop a Comment</h1>
+
+
+    <form action="{% url "post-detail-page" post.slug %}" method="POST">
+
+      {% csrf_token %}
+
+      {% for form_field in comment_form %}
+
+      <div class="form-control {% if form_field.errors %}invalid{% endif %}">
+        {{form_field.label_tag}}
+        {{form_field}}
+        {{form_field.errors}}
+      </div>
+      
+      {% endfor %}
+
+      <button type="submit">COMMENT</button>
+    </form>
+  </section>
+    
+{% endblock content%}
+
+{% comment %} <div>
+  <div class="card-body">
+    <!-- comments -->
+    <h2>{{ comments.count }} comments</h2>
+
+    {% for comment in comments %}
+    <div class="comments" style="padding: 10px;">
+      <p class="font-weight-bold">
+        {{ comment.name }}
+        <span class=" text-muted font-weight-normal">
+          {{ comment.created_on }}
+        </span>
+      </p>
+      {{ comment.body | linebreaks }}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div class="col-md-8 card mb-4  mt-3 ">
+  <div class="card-body">
+    {% if new_comment %}
+    <div class="alert alert-success" role="alert">
+      Your comment is awaiting moderation
+    </div>
+    {% else %}
+    <h3>Leave a comment</h3>
+    <form method="post" style="margin-top: 1.3em;">
+      {{ comment_form.as_p }}
+      {% csrf_token %}
+      <button type="submit" class="btn btn-primary  btn-lg">Submit</button>
+    </form>
+    {% endif %}
+  </div>
+</div>
+</div>
+</div> {% endcomment %}

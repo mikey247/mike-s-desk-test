@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}MY STORED POSTS{% endblock title %}
+
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blog/stored-posts.css' %}">
+{% endblock css_files %}
+
+
+{% block content %}
+<section class="stored-posts">
+     {% if not has_posts  %}
+     <p>no posts saved</p>
+     {% endif %}
+
+     {% comment %} <ul>
+         {% for post in posts %}
+        <li><a href="{% url "post-detail-page" post.slug %}">{{post.Title}}</a></li>
+        {% endfor %}
+    </ul> {% endcomment %}
+    <ul>
+        {% for post  in posts  %}
+        {% include 'blog/includes/post.html' %}
+    
+        {% comment %} <form action="{% url 'remove-post' %}" method="DELETE">
+         {% csrf_token %}
+         <input type="hidden" value="{{post.id}}" name="post_id">
+         <button>Remove post</button>
+        </form> {% endcomment %}
+
+       {% endfor %}
+       
+    </ul>
+</section>
+{% endblock content %}
+

@@ -1,0 +1,45 @@
+{% extends 'base.html' %} 
+{% load static %}
+
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'blog/index.css' %}" />
+<link rel="stylesheet" href="{% static 'blog/post.css' %}" />
+{% endblock css_files %} 
+
+{% block page_title %} Mike's Desk - Home {% endblock page_title %} 
+
+{% block content %} 
+
+
+<section id="welcome">
+  <header>
+    <img src="{% static 'blog/images/hasbullah.jpg' %}" alt="my picture" />
+    <h2>Michael's Desk</h2>
+  </header> 
+  <p>   
+    Hello, I'm Mike and I love to blog about tech and the world, I aim to help
+    out newbies in tech with my articles. WELCOME!!!!!
+  </p>
+</section>
+
+<section id="latest-posts">
+  <h2>My Latest Thoughts</h2>
+
+  <ul>
+    {% for post in posts %}
+    {% include 'blog/includes/post.html' %}
+    {% endfor %}
+   
+  </ul>
+</section>
+
+<section id="about">
+  <h2>What I do</h2>
+  <p>
+    I look to help provide newbies with simplified knowledge on the different
+    areas in the technology sphere
+  </p>
+  <p>My goal is to help people  grow in technlogy and help people make their dreams come through</p>
+</section>
+
+{% endblock content %}
