@@ -49,3 +49,14 @@ font-weight: bold;
 #main-navigation h1:active{
     color: white;
 }
+
+@media(max-width:425px){
+
+    html {
+        
+        font-size: 60.25%;
+      }
+
+    
+
+}
