@@ -41,3 +41,14 @@
 .post:active time {
   color: white;
 }
+
+.post__content p{
+ font-size: 1rem;
+}
+
+@media(max-width:768px){
+
+  .post__content p,.post__content time{
+    font-size: 1.4rem;
+   }
+}

@@ -62,7 +62,7 @@ text-align: center;
 
 #latest-posts li{
     flex: 1;
-    width: 50%;
+    width: 80%;
     margin: 30px auto;
 }
 

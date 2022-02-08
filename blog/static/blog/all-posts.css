@@ -1,20 +1,22 @@
 #all-posts{
     background-color: whitesmoke;
-    padding: 6rem 12%;
+    padding: 6rem 0;
 }
 #all-posts h2{
     color: black;
     text-align: center;
     font-size: 3em;
 }
+ul{
+    display: block;
+    padding-inline-start: 0;
+    
+}
 
 li{
     list-style: none;
     background-color: white;
     border-radius: 10px;
-}
-ul{
-    display: flex;
-    gap: 1.5em;
-    margin: 3em 0;
+    width: 90%;
+    margin: 20px auto;
 }
