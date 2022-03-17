@@ -3,8 +3,7 @@
 from django.db import models
 from django.utils.text import slugify
 from django.core.validators import MinLengthValidator
-from tinymce import models as tinymce_models
-
+from ckeditor_uploader.fields import RichTextUploadingField
 
 # Create your models here.
 
@@ -31,7 +30,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to = "posts", null=True)
     Date= models.DateField(auto_now=True)
     slug= models.SlugField(unique=True,  db_index=True)
-    Content = tinymce_models.HTMLField(validators=[MinLengthValidator(10)])
+    Content = RichTextUploadingField(validators=[MinLengthValidator(10)])
     author = models.ForeignKey(Author, on_delete=models.SET_NULL,null=True, related_name="posts")
     tags= models.ManyToManyField(Tag)
    
