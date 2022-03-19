@@ -9,9 +9,12 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import dj_database_url
 from decouple import config
 from pathlib import Path
+from dotenv import load_dotenv,find_dotenv
+import django_on_heroku
+import django_extensions
 
 
 
@@ -42,10 +45,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'tinymce',
     'ckeditor',
     'ckeditor_uploader',
     'storages',
+    
 
 ]
 
@@ -82,6 +85,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'my_site.wsgi.application'
 
+load_dotenv(find_dotenv())
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
@@ -188,4 +192,4 @@ CKEDITOR_UPLOAD_PATH="uploads/"
 # AKIAQHJQLYLACQNFMXML
 
 # access key
-# m/kI57XfjDvVROp7uhZ5JorMAXbOv2zqK6DTEviQ
+# m/kI57XfjDvVROp7uhZ5JorMAXbOv2zqK6DTEviQ   
