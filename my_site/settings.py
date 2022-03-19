@@ -10,9 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+from decouple import config
 from pathlib import Path
 
-import blog
+
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,10 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-)$u7sr$(j4r77o8y(+umm)y4x&t@*8nt_ylwb+#j*)-m5o+2$i'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = ['mike-s-desk.herokuapp.com', '127.0.0.1']
 
@@ -123,9 +125,9 @@ USE_I18N = True
 USE_TZ = True
 
 
-AWS_ACCESS_KEY_ID = 'AKIAQHJQLYLACQNFMXML'
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 
-AWS_SECRET_ACCESS_KEY = 'm/kI57XfjDvVROp7uhZ5JorMAXbOv2zqK6DTEviQ'
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 
 AWS_STORAGE_BUCKET_NAME ='mike-desk-bucket'
 
